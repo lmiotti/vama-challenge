@@ -1,7 +1,7 @@
-package com.example.bootstrap.utils
+package com.android.vamachallenge.utils
 
-import com.example.bootstrap.models.NetworkError
-import com.example.bootstrap.models.Resource
+import com.android.vamachallenge.models.NetworkError
+import com.android.vamachallenge.models.Resource
 import retrofit2.Response
 
 object NetworkUtils {

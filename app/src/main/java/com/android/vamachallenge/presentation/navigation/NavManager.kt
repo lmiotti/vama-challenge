@@ -1,12 +1,12 @@
-package com.example.bootstrap.navigation
+package com.android.vamachallenge.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.bootstrap.presentation.navigation.Routes
-import com.example.bootstrap.presentation.ui.views.DetailView
-import com.example.bootstrap.presentation.views.HomeView
+import com.android.vamachallenge.presentation.navigation.Routes
+import com.android.vamachallenge.presentation.ui.views.DetailView
+import com.android.vamachallenge.presentation.views.HomeView
 
 @Composable
 fun NavManager() {

@@ -1,4 +1,4 @@
-package com.example.bootstrap.models
+package com.android.vamachallenge.models
 
 sealed class Resource<T>(
     val data: T? = null,

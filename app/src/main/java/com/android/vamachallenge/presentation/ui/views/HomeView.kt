@@ -1,4 +1,4 @@
-package com.example.bootstrap.presentation.views
+package com.android.vamachallenge.presentation.views
 
 import androidx.compose.runtime.Composable
 

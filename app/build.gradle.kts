@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.bootstrap"
+    namespace = "com.android.vamachallenge"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.bootstrap"
+        applicationId = "com.android.vamachallenge"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

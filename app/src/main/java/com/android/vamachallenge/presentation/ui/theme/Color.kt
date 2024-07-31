@@ -1,4 +1,4 @@
-package com.example.bootstrap.ui.theme
+package com.android.vamachallenge.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

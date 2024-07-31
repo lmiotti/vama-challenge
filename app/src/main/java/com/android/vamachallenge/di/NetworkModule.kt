@@ -1,6 +1,6 @@
-package com.example.bootstrap.di
+package com.android.vamachallenge.di
 
-import com.example.bootstrap.BuildConfig
+import com.android.vamachallenge.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
