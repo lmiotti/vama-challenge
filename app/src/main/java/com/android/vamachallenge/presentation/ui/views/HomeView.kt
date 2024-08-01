@@ -1,45 +1,65 @@
 package com.android.vamachallenge.presentation.views
 
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
+import com.android.vamachallenge.presentation.navigation.Routes
 import com.android.vamachallenge.presentation.ui.components.AlbumCard
+import com.android.vamachallenge.presentation.ui.intent.HomeIntent
+import com.android.vamachallenge.presentation.ui.viewmodel.HomeViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeView(onCardClicked: () -> Unit) {
+fun HomeView(
+    viewModel: HomeViewModel = hiltViewModel(),
+    onCardClicked: () -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Top music in the US") })
         }
     ) {
         HomeViewContent(
+            viewModel = viewModel,
             paddingValues = it,
-            onCardClicked = onCardClicked
+            handleIntent = {
+                when(it) {
+                    is HomeIntent.OnAlbumClicked -> onCardClicked()
+                }
+            }
         )
     }
 }
 
-
-val a = listOf(
-    "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/92/9f/69/929f69f1-9977-3a44-d674-11f70c852d1b/24UMGIM36186.rgb.jpg/100x100bb.jpg",
-    "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/24/95/0f/24950f19-f5dd-696b-8295-df4f780a0d9a/196872326017.jpg/100x100bb.jpg",
-    "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/8b/2c/ce/8b2cced1-ef53-ae9f-df26-5c5d8ad0009e/24UMGIM70968.rgb.jpg/100x100bb.jpg"
-)
 @Composable
 fun HomeViewContent(
+    viewModel: HomeViewModel,
     paddingValues: PaddingValues,
-    onCardClicked: () -> Unit
+    handleIntent: (HomeIntent) -> Unit
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     LazyVerticalGrid(
         modifier = Modifier
             .padding(paddingValues)
@@ -48,10 +68,10 @@ fun HomeViewContent(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(a.size) {
+        items(state.albums.size) {
             AlbumCard(
-                a = a[it],
-                onCardClicked = onCardClicked
+                album = state.albums[it],
+                onCardClicked = handleIntent
             )
         }
     }

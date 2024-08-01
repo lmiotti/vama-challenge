@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -15,39 +16,42 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.android.vamachallenge.domain.model.Album
+import com.android.vamachallenge.presentation.ui.intent.HomeIntent
 import com.android.vamachallenge.ui.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlbumCard(
-    a: String,
-    onCardClicked: () -> Unit
+    album: Album,
+    onCardClicked: (HomeIntent) -> Unit
 ) {
     Card(
         modifier = Modifier.aspectRatio(1f),
         shape = RoundedCornerShape(20.dp),
-        onClick = onCardClicked
+        onClick = { onCardClicked(HomeIntent.OnAlbumClicked) }
     ) {
         Box {
             AlbumImage(
                 modifier = Modifier.fillMaxSize(),
-                image = a
+                image = album.thumbnail
             )
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(bottom = 15.dp)
-                    .background(Color.LightGray.copy(alpha = 0.3f)),
+                    .background(Color.LightGray.copy(alpha = 0.3f))
+                    .fillMaxWidth(),
                 verticalArrangement = Arrangement.Center
             ) {
                 AlbumCardText(
                     modifier = Modifier.padding(top = 2.dp),
-                    text = "The Death of Slim Shady (Coup De Grâce)",
+                    text = album.name,
                     style = Typography.labelMedium
                 )
                 AlbumCardText(
                     modifier = Modifier.padding(bottom = 2.dp),
-                    text = "Fuerza Regida",
+                    text = album.artistName,
                     style = Typography.labelSmall
                 )
             }

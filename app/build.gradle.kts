@@ -21,7 +21,7 @@ android {
             useSupportLibrary = true
         }
 
-    buildConfigField("String", "BASE_URL", "\"https://api.rawg.io/api/\"")
+        buildConfigField("String", "BASE_URL", "\"https://rss.applemarketingtools.com/\"")
     }
 
     buildTypes {
@@ -69,10 +69,6 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-    // Room DB
-    implementation(libs.androidx.room.ktx)
-    kapt(libs.androidx.room.compiler)
-
     //Navigation
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
@@ -89,7 +85,6 @@ dependencies {
 
     // Coil
     implementation(libs.coil.compose)
-
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
