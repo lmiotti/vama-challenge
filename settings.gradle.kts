@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Bootstrap"
+rootProject.name = "VamaChallenge"
 include(":app")
  

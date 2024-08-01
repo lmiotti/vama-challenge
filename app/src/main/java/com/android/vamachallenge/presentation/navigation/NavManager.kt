@@ -13,7 +13,9 @@ fun NavManager() {
     val navHostController = rememberNavController()
     NavHost(navController = navHostController, startDestination = Routes.Home.route) {
         composable(Routes.Home.route) {
-            HomeView()
+            HomeView(
+                onCardClicked = { navHostController.navigate(Routes.Detail.route) }
+            )
         }
         composable(Routes.Detail.route) {
             DetailView()
