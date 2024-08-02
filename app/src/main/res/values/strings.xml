@@ -11,5 +11,6 @@
     <!-- Detail -->
     <string name="detail_genre">Genre(s)</string>
     <string name="detail_release_date">Release date</string>
+    <string name="detail_open_itunes">Open iTunes</string>
 
 </resources>
