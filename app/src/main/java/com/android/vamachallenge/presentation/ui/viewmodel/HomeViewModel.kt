@@ -3,8 +3,10 @@ package com.android.vamachallenge.presentation.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.vamachallenge.di.IoDispatcher
+import com.android.vamachallenge.domain.model.Album
 import com.android.vamachallenge.domain.usecase.GetAlbumListUseCase
 import com.android.vamachallenge.models.Resource
+import com.android.vamachallenge.presentation.ui.intent.HomeIntent
 import com.android.vamachallenge.presentation.ui.state.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -34,32 +36,45 @@ class HomeViewModel @Inject constructor(
         get() = _showError
 
     init {
+        getAlbums()
+    }
+
+    fun handleIntent(intent: HomeIntent) {
+        if (intent is HomeIntent.OnRetryClicked) {
+            getAlbums()
+        }
+    }
+    private fun getAlbums() {
         viewModelScope.launch(dispatcher) {
-            getAlbumListUseCase().collectLatest { response ->
-                when(response) {
-                    is Resource.Loading -> _state.update {
-                        it.copy(
-                            isLoading = true,
-                            error = null
-                        )
-                    }
-                    is Resource.Success -> _state.update {
-                        it.copy(
-                            isLoading = false,
-                            albums = response.data ?: listOf(),
-                            error = null
-                        )
-                    }
-                    is Resource.Failure -> {
-                        _state.update {
-                            it.copy(
-                                isLoading = false,
-                                error = response.error?.message
-                            )
-                        }
-                        _showError.emit(true)
-                    }
+            getAlbumListUseCase().collectLatest {
+                handleAlbumsResponse(it)
+            }
+        }
+    }
+
+    private suspend fun handleAlbumsResponse(response: Resource<List<Album>>) {
+        when(response) {
+            is Resource.Loading -> _state.update {
+                it.copy(
+                    isLoading = true,
+                    error = null
+                )
+            }
+            is Resource.Success -> _state.update {
+                it.copy(
+                    isLoading = false,
+                    albums = response.data ?: listOf(),
+                    error = null
+                )
+            }
+            is Resource.Failure -> {
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        error = response.error?.error
+                    )
                 }
+                _showError.emit(true)
             }
         }
     }

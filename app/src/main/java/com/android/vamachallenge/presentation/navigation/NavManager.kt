@@ -7,15 +7,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.android.vamachallenge.domain.model.Album
 import com.android.vamachallenge.presentation.navigation.Routes
-import com.android.vamachallenge.presentation.ui.views.DetailView
-import com.android.vamachallenge.presentation.views.HomeView
+import com.android.vamachallenge.presentation.ui.views.DetailScreen
+import com.android.vamachallenge.presentation.views.HomeScreen
 
 @Composable
 fun NavManager() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Routes.Home) {
         composable<Routes.Home> {
-            HomeView(
+            HomeScreen(
                 onCardClicked = { album ->
                     navController.navigate(Routes.Detail(
                         name = album.name,
@@ -41,7 +41,7 @@ fun NavManager() {
                 copyright = detail.copyright,
                 url = detail.url
             )
-            DetailView(album)
+            DetailScreen(album)
         }
     }
 }

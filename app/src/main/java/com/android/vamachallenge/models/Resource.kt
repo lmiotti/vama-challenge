@@ -9,4 +9,4 @@ sealed class Resource<T>(
     class Loading<T>(): Resource<T>()
 }
 
-data class NetworkError(val code: Int? = null, val message: String)
+data class NetworkError(val status: Int? = null, val error: String)

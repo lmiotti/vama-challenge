@@ -1,7 +1,6 @@
 package com.android.vamachallenge.presentation.ui.views
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -20,13 +18,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.android.vamachallenge.domain.model.Album
 import com.android.vamachallenge.presentation.ui.components.AlbumImage
@@ -34,26 +33,37 @@ import com.android.vamachallenge.ui.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailView(album: Album) {
+fun DetailScreen(album: Album) {
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Text(text = "Titulo del album")
-            })
+            TopAppBar(
+                title = {
+                    Text(
+                        text = album.name,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Black,
+                    titleContentColor = Color.White
+                )
+            )
         }
     ) {
-        DetailViewContent(it, album)
+        DetailScreenContent(it, album)
     }
 }
 
 @Composable
-fun DetailViewContent(
+fun DetailScreenContent(
     paddingValues: PaddingValues,
     album: Album
 ) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
+            .background(Color.Black)
             .padding(paddingValues)
             .padding(horizontal = 30.dp)
             .fillMaxSize()
@@ -75,20 +85,20 @@ fun DetailViewContent(
         Text(
             text = album.name,
             modifier = Modifier.padding(horizontal = 30.dp),
-            color = Color.Black,
+            color = Color.White,
             textAlign = TextAlign.Center,
             style = Typography.titleLarge
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = album.artistName,
-            color = Color.Black,
+            color = Color.White,
             style = Typography.titleMedium
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "Genre(s)",
-            color = Color.Black,
+            color = Color.White,
             fontWeight = FontWeight.Bold,
             style = Typography.bodyMedium
         )
@@ -96,23 +106,26 @@ fun DetailViewContent(
         album.genres.forEach {
             Text(
                 text = it,
+                color = Color.White,
                 style = Typography.bodyMedium
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "Release date",
-            color = Color.Black,
+            color = Color.White,
             fontWeight = FontWeight.Bold,
             style = Typography.bodyMedium
         )
         Text(
             text = album.releaseDate,
+            color = Color.White,
             style = Typography.bodyMedium
         )
         Spacer(modifier = Modifier.weight(1f))
         Text(
             text = album.copyright,
+            color = Color.White,
             style = Typography.bodySmall
         )
     }
