@@ -29,7 +29,7 @@ fun AlbumCard(
     Card(
         modifier = Modifier.aspectRatio(1f),
         shape = RoundedCornerShape(20.dp),
-        onClick = { onCardClicked(HomeIntent.OnAlbumClicked) }
+        onClick = { onCardClicked(HomeIntent.OnAlbumClicked(album)) }
     ) {
         Box {
             AlbumImage(

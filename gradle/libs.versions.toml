@@ -15,7 +15,7 @@ lifecycleRuntimeKtx = "2.8.1"
 activityCompose = "1.9.0"
 composeBom = "2023.08.00"
 loggingInterceptor = "4.12.0"
-navigationCompose = "2.5.3"
+navigationCompose = "2.8.0-beta06"
 pagingRuntimeKtx = "3.3.1"
 roomKtx = "2.6.1"
 

@@ -23,17 +23,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
-import com.android.vamachallenge.presentation.navigation.Routes
+import com.android.vamachallenge.domain.model.Album
 import com.android.vamachallenge.presentation.ui.components.AlbumCard
 import com.android.vamachallenge.presentation.ui.intent.HomeIntent
 import com.android.vamachallenge.presentation.ui.viewmodel.HomeViewModel
-import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeView(
     viewModel: HomeViewModel = hiltViewModel(),
-    onCardClicked: () -> Unit
+    onCardClicked: (Album) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -45,7 +44,7 @@ fun HomeView(
             paddingValues = it,
             handleIntent = {
                 when(it) {
-                    is HomeIntent.OnAlbumClicked -> onCardClicked()
+                    is HomeIntent.OnAlbumClicked -> onCardClicked(it.album)
                 }
             }
         )
