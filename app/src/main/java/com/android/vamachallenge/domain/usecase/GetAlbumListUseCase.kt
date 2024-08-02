@@ -21,7 +21,7 @@ class GetAlbumListUseCase @Inject constructor(
                         val albums = it.data?.map { it.toAlbum() } ?: listOf()
                         Resource.Success(albums)
                     }
-                    is Resource.Failure -> Resource.Failure(networkError = it.error!!)// ?: NetworkError(message = "Unexpected Error"))
+                    is Resource.Failure -> Resource.Failure(networkError = it.error!!)
                     is Resource.Loading -> Resource.Loading()
                 }
             }
