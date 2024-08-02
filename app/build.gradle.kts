@@ -87,7 +87,12 @@ dependencies {
     // Coil
     implementation(libs.coil.compose)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    // Serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    // Shimmer
+    implementation(libs.compose.shimmer)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
