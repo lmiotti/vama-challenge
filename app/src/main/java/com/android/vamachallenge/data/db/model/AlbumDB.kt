@@ -8,9 +8,8 @@ import io.realm.kotlin.types.annotations.PrimaryKey
 import org.mongodb.kbson.ObjectId
 
 class AlbumDB : RealmObject {
-    @PrimaryKey var _id: ObjectId = ObjectId()
+    @PrimaryKey var id: String = ""
     var artistName: String = ""
-    var id: String = ""
     var name: String = ""
     var releaseDate: String = ""
     var kind: String = ""

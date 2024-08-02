@@ -7,7 +7,6 @@ import org.mongodb.kbson.ObjectId
 
 class GenreDB : RealmObject {
     @PrimaryKey
-    var _id: ObjectId = BsonObjectId()
     var genreId: String = ""
     var name: String = ""
     var url: String = ""
