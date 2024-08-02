@@ -2,8 +2,7 @@ package com.android.vamachallenge.domain.usecase
 
 import com.android.vamachallenge.data.repository.album.AlbumRepository
 import com.android.vamachallenge.domain.model.Album
-import com.android.vamachallenge.models.NetworkError
-import com.android.vamachallenge.models.Resource
+import com.android.vamachallenge.domain.model.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn

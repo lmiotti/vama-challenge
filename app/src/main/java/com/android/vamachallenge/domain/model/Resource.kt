@@ -1,4 +1,4 @@
-package com.android.vamachallenge.models
+package com.android.vamachallenge.domain.model
 
 sealed class Resource<T>(
     val data: T? = null,

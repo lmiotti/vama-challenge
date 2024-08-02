@@ -15,7 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import com.android.vamachallenge.R
 import com.android.vamachallenge.domain.model.Album
 import com.android.vamachallenge.presentation.ui.intent.HomeIntent
 import com.android.vamachallenge.ui.theme.Typography
@@ -28,7 +30,7 @@ fun AlbumCard(
 ) {
     Card(
         modifier = Modifier.aspectRatio(1f),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)),
         onClick = { onCardClicked(HomeIntent.OnAlbumClicked(album)) }
     ) {
         Box {
@@ -39,18 +41,18 @@ fun AlbumCard(
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(bottom = 15.dp)
+                    .padding(bottom = dimensionResource(id = R.dimen.padding_m))
                     .background(Color.LightGray.copy(alpha = 0.3f))
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.Center
             ) {
                 AlbumCardText(
-                    modifier = Modifier.padding(top = 2.dp),
+                    modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_xs)),
                     text = album.name,
                     style = Typography.labelMedium
                 )
                 AlbumCardText(
-                    modifier = Modifier.padding(bottom = 2.dp),
+                    modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_xs)),
                     text = album.artistName,
                     style = Typography.labelSmall
                 )

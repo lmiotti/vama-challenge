@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -22,11 +22,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import com.android.vamachallenge.R
 import com.android.vamachallenge.domain.model.Album
 import com.android.vamachallenge.presentation.ui.components.AlbumImage
 import com.android.vamachallenge.ui.theme.Typography
@@ -45,8 +46,8 @@ fun DetailScreen(album: Album) {
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Black,
-                    titleContentColor = Color.White
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.secondary
                 )
             )
         }
@@ -63,69 +64,67 @@ fun DetailScreenContent(
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.primary)
             .padding(paddingValues)
-            .padding(horizontal = 30.dp)
+            .padding(horizontal = dimensionResource(id = R.dimen.padding_xl))
             .fillMaxSize()
             .verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
         Card(
-            shape = RoundedCornerShape(20.dp),
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)),
         ) {
             AlbumImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
+                modifier = Modifier.fillMaxWidth(),
                 image = album.thumbnail
             )
         }
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_l)))
         Text(
             text = album.name,
-            modifier = Modifier.padding(horizontal = 30.dp),
-            color = Color.White,
+            modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_xl)),
+            color = MaterialTheme.colorScheme.secondary,
             textAlign = TextAlign.Center,
             style = Typography.titleLarge
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_m)))
         Text(
             text = album.artistName,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.secondary,
             style = Typography.titleMedium
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_m)))
         Text(
-            text = "Genre(s)",
-            color = Color.White,
+            text = stringResource(id = R.string.detail_genre),
+            color = MaterialTheme.colorScheme.secondary,
             fontWeight = FontWeight.Bold,
             style = Typography.bodyMedium
         )
-        Spacer(modifier = Modifier.height(2.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_s)))
         album.genres.forEach {
             Text(
                 text = it,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.secondary,
                 style = Typography.bodyMedium
             )
         }
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_m)))
         Text(
-            text = "Release date",
-            color = Color.White,
+            text = stringResource(id = R.string.detail_release_date),
+            color = MaterialTheme.colorScheme.secondary,
             fontWeight = FontWeight.Bold,
             style = Typography.bodyMedium
         )
         Text(
             text = album.releaseDate,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.secondary,
             style = Typography.bodyMedium
         )
         Spacer(modifier = Modifier.weight(1f))
         Text(
             text = album.copyright,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.secondary,
             style = Typography.bodySmall
         )
     }

@@ -1,6 +1,7 @@
 package com.android.vamachallenge.presentation.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,10 +16,9 @@ fun AlbumImage(
     val image = rememberAsyncImagePainter(model = image)
 
     Image(
-        modifier = modifier,
+        modifier = modifier.aspectRatio(1f),
         painter = image,
         contentDescription = null,
-        contentScale = ContentScale.Crop,
-
+        contentScale = ContentScale.Crop
     )
 }

@@ -1,7 +1,7 @@
-package com.android.vamachallenge.utils
+package com.android.vamachallenge.data.network.utils
 
-import com.android.vamachallenge.models.NetworkError
-import com.android.vamachallenge.models.Resource
+import com.android.vamachallenge.domain.model.NetworkError
+import com.android.vamachallenge.domain.model.Resource
 import com.google.gson.Gson
 import retrofit2.Response
 

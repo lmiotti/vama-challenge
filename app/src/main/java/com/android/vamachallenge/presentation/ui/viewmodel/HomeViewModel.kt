@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.android.vamachallenge.di.IoDispatcher
 import com.android.vamachallenge.domain.model.Album
 import com.android.vamachallenge.domain.usecase.GetAlbumListUseCase
-import com.android.vamachallenge.models.Resource
+import com.android.vamachallenge.domain.model.Resource
 import com.android.vamachallenge.presentation.ui.intent.HomeIntent
 import com.android.vamachallenge.presentation.ui.state.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject

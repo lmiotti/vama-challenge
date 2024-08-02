@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,15 +16,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,9 +33,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -62,10 +61,10 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Top music in the US") },
+                title = { Text(stringResource(id = R.string.home_title)) },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Black,
-                    titleContentColor = Color.White
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.secondary
                 )
             )
         }
@@ -116,12 +115,13 @@ fun HomeScreenGrid(
 ) {
     LazyVerticalGrid(
         modifier = Modifier
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.primary)
             .padding(paddingValues)
-            .padding(horizontal = 10.dp),
+            .padding(horizontal = dimensionResource(id = R.dimen.padding_m))
+            .fillMaxSize(),
         columns = GridCells.Fixed(2),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.home_grid_space)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.home_grid_space))
     ) {
         if (state.isLoading) {
             items(10) {
@@ -129,7 +129,7 @@ fun HomeScreenGrid(
                     modifier = Modifier
                         .aspectRatio(1f)
                         .shimmer(),
-                    shape = RoundedCornerShape(20.dp),
+                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)),
                 ) {}
             }
         } else {
@@ -149,41 +149,41 @@ fun HomeEmptyScreen(
 ) {
     Column(
         modifier = Modifier
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.primary)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Image(
             painterResource(id = R.drawable.ic_internet_connection),
-            contentDescription = "No Internet Connection",
-            modifier = Modifier.size(200.dp),
+            contentDescription = stringResource(id = R.string.home_no_internet),
+            modifier = Modifier.size(dimensionResource(id = R.dimen.home_empty_width)),
             colorFilter = ColorFilter.tint(Color.White)
         )
         Text(
-            text = "An error has occurred.",
-            modifier = Modifier.width(200.dp),
-            color = Color.White,
+            text = stringResource(id = R.string.home_error_occurred),
+            modifier = Modifier.width(dimensionResource(id = R.dimen.home_empty_width)),
+            color = MaterialTheme.colorScheme.secondary,
             style = Typography.bodySmall,
             textAlign = TextAlign.Center
         )
         Text(
-            text = "Please try again.",
-            modifier = Modifier.width(200.dp),
-            color = Color.White,
+            text = stringResource(id = R.string.home_try_again),
+            modifier = Modifier.width(dimensionResource(id = R.dimen.home_empty_width)),
+            color = MaterialTheme.colorScheme.secondary,
             style = Typography.bodySmall,
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_l)))
         Button(
             onClick = { handleIntent(HomeIntent.OnRetryClicked) },
-            modifier = Modifier.width(200.dp),
+            modifier = Modifier.width(dimensionResource(id = R.dimen.home_empty_width)),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.White,
                 contentColor = Color.Black
             )
         ) {
-            Text("Retry")
+            Text(stringResource(id = R.string.home_retry_button))
         }
     }
 }

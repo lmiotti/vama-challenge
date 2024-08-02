@@ -5,9 +5,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import com.android.vamachallenge.R
 
 @Composable
 fun AlbumCardText(
@@ -16,7 +17,7 @@ fun AlbumCardText(
     style: TextStyle
 ) {
     Text(
-        modifier = modifier.padding(horizontal = 10.dp),
+        modifier = modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_m)),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
         color = Color.Black,

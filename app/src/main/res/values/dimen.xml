@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="corner_radius">20dp</dimen>
+
+    <!-- Home -->
+    <dimen name="home_grid_space">10dp</dimen>
+    <dimen name="home_empty_width">200dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_xs">2dp</dimen>
+    <dimen name="padding_s">5dp</dimen>
+    <dimen name="padding_m">10dp</dimen>
+    <dimen name="padding_l">20dp</dimen>
+    <dimen name="padding_xl">30dp</dimen>
+</resources>

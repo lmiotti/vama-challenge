@@ -2,8 +2,8 @@ package com.android.vamachallenge.data.network.datasource
 
 import com.android.vamachallenge.data.network.model.AlbumApiResponse
 import com.android.vamachallenge.data.network.service.AlbumService
-import com.android.vamachallenge.models.Resource
-import com.android.vamachallenge.utils.NetworkUtils
+import com.android.vamachallenge.domain.model.Resource
+import com.android.vamachallenge.data.network.utils.NetworkUtils
 import javax.inject.Inject
 
 class AlbumRemoteDataSourceImpl @Inject constructor(
