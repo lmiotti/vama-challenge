@@ -10,7 +10,7 @@ class AlbumRemoteDataSourceImpl @Inject constructor(
     private val service: AlbumService
 ): AlbumRemoteDataSource {
     override suspend fun getAlbums(): Resource<List<AlbumApiResponse>> {
-        val response =  NetworkUtils.safeApiCall { service.getMostViewedAlbums() }
+        val response = NetworkUtils.safeApiCall { service.getMostViewedAlbums() }
         return if (response is Resource.Success) {
             val feed = response.data?.feed
             val albums = feed?.results?.map {

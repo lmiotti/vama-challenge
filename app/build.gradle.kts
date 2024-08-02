@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     kotlin("plugin.serialization")
+    id("io.realm.kotlin")
 }
 
 android {
@@ -93,6 +94,8 @@ dependencies {
     // Shimmer
     implementation(libs.compose.shimmer)
 
+    // Realm
+    implementation(libs.library.base)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

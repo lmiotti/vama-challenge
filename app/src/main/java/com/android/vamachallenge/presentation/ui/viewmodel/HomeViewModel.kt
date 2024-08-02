@@ -9,8 +9,12 @@ import com.android.vamachallenge.presentation.ui.state.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,20 +29,37 @@ class HomeViewModel @Inject constructor(
     val state: StateFlow<HomeState>
         get() = _state
 
-    init {
-        _state.update { _state.value.copy(isLoading = true) }
+    private val _showError = MutableSharedFlow<Boolean>()
+    val showError: SharedFlow<Boolean>
+        get() = _showError
 
+    init {
         viewModelScope.launch(dispatcher) {
-            val response = getAlbumListUseCase()
-            if (response is Resource.Success) {
-                _state.update {
-                    _state.value.copy(
-                        isLoading = false,
-                        albums = response.data ?: listOf()
-                    )
+            getAlbumListUseCase().collectLatest { response ->
+                when(response) {
+                    is Resource.Loading -> _state.update {
+                        it.copy(
+                            isLoading = true,
+                            error = null
+                        )
+                    }
+                    is Resource.Success -> _state.update {
+                        it.copy(
+                            isLoading = false,
+                            albums = response.data ?: listOf(),
+                            error = null
+                        )
+                    }
+                    is Resource.Failure -> {
+                        _state.update {
+                            it.copy(
+                                isLoading = false,
+                                error = response.error?.message
+                            )
+                        }
+                        _showError.emit(true)
+                    }
                 }
-            } else {
-                _state.update { _state.value.copy(error = "ERROR") }
             }
         }
     }
